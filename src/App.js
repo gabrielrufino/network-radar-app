@@ -1,19 +1,36 @@
-import {useEffect} from 'react'
-import 'bulma/css/bulma.min.css';
+import { Line } from 'react-chartjs-2'
+import {useEffect, useState} from 'react'
+import 'bulma/css/bulma.min.css'
 
 import Header from './components/Header'
 
 function App() {
+  const [speeds, setSpeeds] = useState([])
+
   useEffect(() => {
     fetch('http://localhost:3000/speeds')
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => setSpeeds(data))
   }, [])
 
   return (
     <div>
       <Header />
-      <h1>Network Radar</h1>
+      <Line
+        data={{
+          labels: speeds.map(speed => speed.started_at),
+          datasets: [
+            {
+              label: 'Download',
+              data: speeds.map(speed => speed.download)
+            },
+            {
+              label: 'Upload',
+              data: speeds.map(speed => speed.upload)
+            }
+          ]
+        }}
+      />
     </div>
   );
 }
