@@ -1,6 +1,8 @@
 import {useEffect} from 'react'
 import 'bulma/css/bulma.min.css';
 
+import Header from './components/Header'
+
 function App() {
   useEffect(() => {
     fetch('http://localhost:3000/speeds')
@@ -10,6 +12,7 @@ function App() {
 
   return (
     <div>
+      <Header />
       <h1>Network Radar</h1>
     </div>
   );
