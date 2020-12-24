@@ -8,7 +8,7 @@ function App() {
   const [speeds, setSpeeds] = useState([])
 
   useEffect(() => {
-    fetch('http://127.0.0.1:3000/speeds')
+    fetch('http://raspberry.local:3000/speeds')
       .then(response => response.json())
       .then(data => setSpeeds(data))
   }, [])
